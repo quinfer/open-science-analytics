@@ -19,11 +19,9 @@ set.seed(1234)
 ```
 
 layout: true
-  
 <div class="my-footer">
 <span>
-<a href="https://bit.ly/teach-r-online-mats" target="_blank"><b>bit.ly/teach-r-online-mats</b></a> - Dr. Mine Çetinkaya-Rundel & Dr. Colin Rundel
+<a href="https://quinference.com" target="_blank"><b>quinference.com</b></a> - Dr. Barry Quinn
 </span>
 </div> 
-
 ---
