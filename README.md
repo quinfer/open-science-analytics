@@ -1,1 +1,1 @@
-# Guides for teaching in the Cloud
+# Guides for teaching open science analytics
