@@ -4,11 +4,12 @@ subtitle: "Q-RaP and teaching in the `r emo::ji('cloud')`"
 author: "Barry Quinn"
 output:
   xaringan::moon_reader:
-    #self_contained: true
+    self_contained: true
     lib_dir: libs
     css: ["xaringan-themer.css", "slides-style.css","mycssblend.css"]
     seal: true
-    nature: 
+    nature:
+      countdown: 120000 
       highlightStyle: solarized-light
       highlightLines: true
       countIncrementalSlides: true
@@ -55,7 +56,7 @@ style_mono_accent(
 
 # Outline
 .salt[
-- Credibility and relevance teaching
+- Credibility and relevance in teaching
 - Open science analytics
 - Some examples in my teaching
 - What is Q-RaP?
@@ -105,16 +106,34 @@ class: inverse
 .huge-text[Goals]
 ]
 
-.pull-right-2.large[
+.pull-right-2[
 1.  Produce interesting output with data (and code) within the first ten minutes of the first class, 
   - The knock-on effect is to challenge students to infer meaning from data and statistics from day one.
+  
 2. Get students to think about computation as an integral part of their analytics curriculum[@Kaplan2007; @Cetinkaya-Rundel2018;@Quinn2022]
-3. Demystify the [folk theorem of statistical computing](https://statmodeling.stat.columbia.edu/2008/05/13/the_folk_theore/) where students think that changing the computing environment improves their output;
+
+3. Demystify the [folk theorem of statistical computing](https://statmodeling.stat.columbia.edu/2008/05/13/the_folk_theore/) 
 4. Produce relevance students
+
 5. Computation as a friction less part of curricula
-6. Active learning from mistakes not passive cramming challenges
+6. Active learning from mistakes 
+
 7. Growth mindset learning
 ]
+
+---
+class: middle
+
+## Active learning and the 15 minute rule
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZS8QHRtzcPg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  - We will use the **15 minute** rule in this class.
+  - If you encounter problems, spend 15 minutes troubleshooting on your own.
+  - Make use of Google and StackOverflow to resolve the error
+  - If your problem is not resolved after 15 minutes.
+  - Use my Slack channel to **[ask for help]**. join [here](https://join.slack.com/t/rethinkingeco-3ss9716/shared_invite/zt-12nfdfr7o-XAy2Ef1knAKXgUNo2kWw3w) 
+
 
 ---
 class: middle
@@ -265,6 +284,7 @@ class: middle
   ]
 ]
 
+
 ---
 class: middle
 
@@ -280,7 +300,7 @@ class: middle
 - Load these packages
 - Install git
 ]
---
+
 .pull-right[
 ### much less friction
 
@@ -292,7 +312,7 @@ class: middle
 ```
 ]
 
-
+---
 class: middle
 
 .pull-left[
@@ -560,6 +580,12 @@ class: middle
 ---
 class: middle
 
-.hand-large[thank you!]
+.hand-large[thank you! <br>Questions?]
 
-- All my material can be found at https://github/quinfer/digital-age-teaching
+- All my material can be found at https://github/quinfer/open-science-analytics
+
+- .hand[My Jerry Maguire Moment:]
+
+.blockquote[Quinn, B. Teaching open science analytics in the age of financial technology. QMS Working Paper Series (Under Review at Journal of International Financial Markets, Institutions and Money ) (2022) doi:10.2139/ssrn.4019430.]
+  
+
