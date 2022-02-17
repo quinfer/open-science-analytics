@@ -1,0 +1,565 @@
+---
+title: "Teaching <br> Open Science Analytics <br> in the Digital Age"
+subtitle: "Q-RaP and teaching in the `r emo::ji('cloud')`"
+author: "Barry Quinn"
+output:
+  xaringan::moon_reader:
+    #self_contained: true
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slides-style.css","mycssblend.css"]
+    seal: true
+    nature: 
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: true
+      ratio: "16:9"
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+library(xaringanExtra)
+library(fontawesome)
+use_tile_view()
+use_webcam()
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+  )
+```
+
+```{css, echo = F}
+.bg_digital {
+  position: relative;
+  z-index: 1;
+}
+
+.bg_digital::before {    
+      content: "";
+      background-image: url('img/digital-transformation.jpg');
+      background-size: cover;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      opacity: 0.4;
+      z-index: -1;
+}
+```
+
+
+# Outline
+.salt[
+- Credibility and relevance teaching
+- Open science analytics
+- Some examples in my teaching
+- What is Q-RaP?
+- Why use Q-RaP?
+]
+
+---
+class: middle
+
+# Credibility and relevance crisis
+
+- Relevance and quality of research in business schools has been under attack for more than two decades. (Hambrick 1994, Harvey 2017)
+
+([Responsible Research for Business and Management 2020 Position Paper](https://www.rrbm.network/position-paper/)) argues:
+
+- .large[CREDIBILITY:]<br> Research quality and integrity are under attack as evaluation systems promote bad research practices encouraging novelty over replicability.
+- .blockquote[Responsible research, using open science principles, can provide useful and credible knowledge.]
+
+- .large[RELEVANCE:] <br>Research feeds knowledge to business education, yet there is a widening gap between research and practice.
+
+
+.footnote[Don Hambrick’s (1994) presidential address at the 1993 Academy of Management’s annual meeting is often cited as the beginning of this conversation in the management field]
+
+---
+class: middle
+
+# Open science
+
+.hand[Open Science is about increasing rigour, accountability and reproducibility for research]
+
+.blockquote[
+Open Science is the practice of science in such a way that others can collaborate and contribute, where research data, lab notes and other research processes are freely available, under terms that enable reuse, redistribution and reproduction of the research and its underlying data and methods. 
+]
+<br>
+.blockquote[
+In a nutshell, Open Science is transparent and accessible knowledge that is shared and developed through collaborative networks (Vicente-Sáez & Martínez-Fuentes 2018).
+]
+
+.footnote[[Open Science Training Handbook 2020](https://open-science-training-handbook.gitbook.io/book/open-science-basics/open-concepts-and-principles)]
+
+---
+class: inverse
+
+# Open science analytics
+
+.pull-left-1[
+.huge-text[Goals]
+]
+
+.pull-right-2.large[
+1.  Produce interesting output with data (and code) within the first ten minutes of the first class, 
+  - The knock-on effect is to challenge students to infer meaning from data and statistics from day one.
+2. Get students to think about computation as an integral part of their analytics curriculum[@Kaplan2007; @Cetinkaya-Rundel2018;@Quinn2022]
+3. Demystify the [folk theorem of statistical computing](https://statmodeling.stat.columbia.edu/2008/05/13/the_folk_theore/) where students think that changing the computing environment improves their output;
+4. Produce relevance students
+5. Computation as a friction less part of curricula
+6. Active learning from mistakes not passive cramming challenges
+7. Growth mindset learning
+]
+
+---
+class: middle
+
+# Open science analytics
+
+.pull-left[
+.salt[Principles]
+- Experiential learning (brake it to learn it)
+- Embedding real-world practice
+- Analytics integrity
+- Culture of curiosity (not competition)
+- Literate programming ([Knuth (1992)](https://www-cs-faculty.stanford.edu/~knuth/lp.html))
+]
+.pull-right[
+.acid[Teaching environment toolkit]
+- Open source software 
+- `r fa(name='r-project',fill='blue')` `r fa(name='plus')` `r fa(name='python',fill='blue')` `r fa(name='plus')` `r fa(name='terminal',fill='blue')`
+- Cloud computing
+- Version control
+- Computational notebook
+- Web apps
+- Simulation (fake it before you make it)
+]
+
+---
+class: middle
+
+# Cost of open science analytics
+
+- Upskill and reskill colleagues
+- Resistance from higher ups
+- IT and DevOps support
+- ?????
+
+---
+class: middle
+
+.huge-text[What is Q-RaP?]
+
+--
+
+### Qms-Remote analytics Platform
+
+--
+.acid[It consists of two parts]
+.pull-left[
+**Advanced Teaching and Research**
+- High-Performance Cloud Computing Suite
+- Hosted in Azure
+- Managed by [QMS DevOps Team](https://quinference.com)
+- For Advanced Analytics at PGT and PGR level
+- Analytics platform
+- Visualisation platform
+- Access on approval form
+]
+.pull-right[
+**Foundational Teaching**
+- RStudio Cloud (200+ students concurrently)
+- 2022 semester two analytics modules on the masters
+  ]
+
+---
+class: middle
+
+## Examples of use
+
+.pull-left[
+![](img/qrap/connect1.png)
+]
+
+.pull-right[
+https://q-rap.connnect.qub.ac.uk/QSMF
+<iframe width="100%" height="400"
+  src="https://q-rap.connect.qub.ac.uk/QSMF"
+  frameborder="0" allow="autoplay; encrypted-media"
+  allowfullscreen></iframe>
+]
+
+---
+class: middle
+
+## Examples of foundational use
+
+![](img/qrap/rscloud.png)   
+
+---
+class: middle
+
+## Infrastructure 
+
+.pull-left.blockquote[
+- RStudio Team is a bundle of RStudio's enterprise-grade professional software for scaling data science analytical work across your team, sharing data science results with your key stakeholders, and managing R and Python packages. 
+
+
+- RStudio Team includes RStudio Workbench, RStudio Package Manager, and RStudio Connect.  RStudio Team offers convenience, simplicity, and savings to organisations using R, Python and RStudio at scale. 
+
+- Free to academia for teaching
+
+- Allows best practice usage of R markdwon, Git and dockerisation.
+]
+.pull-right[
+![](img/Team.png)
+]
+---
+class: middle
+
+# What is wrong with computer labs?
+
+.large[
+Compared to the computer labs approach, our approach has three distinct benefits:
+
+1. Passive lecturing then active labs are replaced by dynamic lectures and labs and 24/7 access to computing for active independent learning;
+2. Help students who have cost constraints or limitation to accessing computing hardware;
+3. Ease of sharing code, data and environments.
+]
+
+---
+class: middle
+
+.pull-left[
+### you used to have this
+```{r computer-lab, echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/jonathan-borba-PZBjJ12Xv2s-unsplash.jpg")
+```
+]
+--
+.pull-right[
+### and now you have this
+```{r laptop-at-home, echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/sincerely-media-o5Key-1HzaY-unsplash.jpg")
+```
+]
+
+.footnote[
+.tiny[Photos by Jonathan Borba and Sincerely Media on Unsplash.]
+]
+---
+class: middle
+
+.pull-left[
+  .huge-text[Why]
+]
+.pull-right[
+  .larger[
+  RStudio  
+  in the cloud?
+  ]
+]
+
+---
+class: middle
+
+.pull-left[
+### lots of friction points
+
+- Install R
+- Install RStudio
+- Install the following packages:
+  - rmarkdown
+  - tidyverse 
+  - ...
+- Load these packages
+- Install git
+]
+--
+.pull-right[
+### much less friction
+
+- Go to rstudio.cloud
+- Log in
+
+```{r hello-r, eval=FALSE}
+>hello R!
+```
+]
+
+
+class: middle
+
+.pull-left[
+  .huge-text[How]
+]
+.pull-right[
+  .larger[
+  RStudio  
+  in the cloud?
+  ]
+]
+
+---
+class: middle
+
+.pull-left[
+- .acid[RStudio Workbench (Advanced teaching)]
+You have...
+- sysadmin experience / IT support
+- hardware / local VM / cloud computing credit
+- RStudio experience
+]
+.pull-right[
+- .acid[RStudio Cloud]
+
+You have...
+- RStudio experience
+]
+
+
+---
+class: middle
+
+.pull-left[
+  .huge-text[Hello]
+]
+.pull-right[
+  .larger[
+  Q-RaP
+  RStudio  
+  Cloud
+  ]
+]
+
+---
+class: middle
+
+## What is RStudio Cloud?
+
+<br>
+
+.pull-left-narrow[
+```{r echo=FALSE}
+knitr::include_graphics("img/cloud.png")
+```
+]
+.pull-right-wide[
+.large[[**RStudio Cloud**](https://rstudio.cloud/) created to make it easy for professionals, hobbyists, trainers, teachers, and students to do, share, teach, and learn data science using R.]
+]
+
+---
+class: middle
+
+.center[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/rstudio-ide.png")
+```
+]
+
+---
+class: middle
+
+.center[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/rstudio-cloud.png")
+```
+]
+
+---
+class: middle
+
+## Why RStudio Cloud?
+
+- Does not require IT support
+
+--
+- Git works out of the box
+- Knit to PDF and Word works out of the box
+
+--
+- Features designed for instructors
+
+---
+class: middle
+
+## Contexts
+
+- Shorter workshops: Likely no opportunity to communicate pre-workshop instructions, varied computing background and learning goals
+
+- Semester long courses
+  - Intro data science / statistics: little to no background in stats, data science, programming
+  - Upper level data science / statistics: Varied computing background and different computer setups
+
+---
+class: middle
+
+## RStudio Cloud: First look
+
+```{r echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("img/landing-1.png")
+```
+
+---
+class: middle
+
+## Workspaces
+
+- When you create an account on RStudio Cloud you get a workspace of your own
+
+- You can add a new workspace and control its permissions
+
+- Projects in either workspace can be public or private
+
+---
+class: middle
+
+## A framework for workspaces
+
+```{r echo=FALSE, out.width="90%", fig.align="center"}
+knitr::include_graphics("img/landing-2.png")
+```
+
+---
+class: middle
+
+## Projects
+
+.pull-left[
+A new project in RStudio Cloud
+```{r echo=FALSE, out.width="90%", fig.align="center"}
+knitr::include_graphics("img/new-project-cloud.png")
+```
+]
+.pull-right[
+is a new project in RStudio IDE
+```{r echo=FALSE, out.width="90%", fig.align="center"}
+knitr::include_graphics("img/new-project-local.png")
+```
+]
+
+.alert[
+**Top Tip:** If you use RStudio, use projects! Trust me, you won’t regret it. Find out more on [R for Data Science](https://r4ds.had.co.nz/workflow-projects.html).
+]
+
+---
+class: middle
+
+# Computational Notebooks
+- Computational notebooks are documents that combine code, discussion and output in a dynamic reproducible format. 
+- An essential advantage of computational notebooks is that they embody the PPDAC credible analysis workflow (Problem, Plan, Data, Analysis, Communication). 
+- PPDAC is the professional standard for data analysis and plausible inference[@Spiegelhalter2019].
+- Unlike the copy and paste approach, all five parts of the PPDAC approach can be included in one document, providing an enhanced level of transparency, portability and reproducibility.
+
+
+
+---
+class:middle
+
+## Git and GitHub
+
+.pull-left[
+```{r echo=FALSE, out.width="25%"}
+knitr::include_graphics("img/git-logo.png")
+```
+- Git is a version control system -- like “Track Changes” features from Microsoft Word, on steroids
+- It's not the only version control system, but it's a very popular one
+]
+.pull-right[
+```{r echo=FALSE, out.width="25%"}
+knitr::include_graphics("img/github-logo.png")
+```
+- GitHub is the home for your Git-based projects on the internet -- like DropBox but much, much better
+
+- We will use GitHub as a platform for web hosting and collaboration (and as our course management system!)
+]
+
+---
+class: middle
+
+## Versioning
+
+```{r echo=FALSE, fig.align = "center", out.width = "70%"}
+knitr::include_graphics("img/lego-steps.png")
+```
+
+---
+class: middle
+
+## Versioning 
+
+### with human readable messages
+
+```{r echo=FALSE, fig.align = "center", out.width = "60%"}
+knitr::include_graphics("img/lego-steps-commit-messages.png")
+```
+
+---
+class: middle
+
+## Why do we need version control?
+
+```{r echo=FALSE, fig.align = "center", out.width="35%"}
+knitr::include_graphics("img/phd_comics_vc.gif")
+```
+
+---
+class: middle
+
+## How will we use Git and GitHub?
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-01.png")
+```
+
+---
+class: middle
+
+## How will we use Git and GitHub?
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-02.png")
+```
+
+---
+class: middle
+
+## How will we use Git and GitHub?
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-03.png")
+```
+
+---
+class: middle
+
+## How will we use Git and GitHub?
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-04.png")
+```
+
+---
+class: middle
+
+# Git and GitHub tips
+
+- There are millions of git commands -- ok, that's an exaggeration, but there are a lot of them -- and very few people know them all. 99% of the time you will use git to add, commit, push, and pull.
+
+--
+- We will be doing Git things and interfacing with GitHub through RStudio, but if you google for help you might come across methods for doing these things in the command line -- skip that and move on to the next resource unless you feel comfortable trying it out.
+
+--
+- There is a great resource for working with git and R: [happygitwithr.com](http://happygitwithr.com/). Some of the content in there is beyond the scope of this course, but it's a good place to look for help.
+
+---
+class: middle
+
+.hand-large[thank you!]
+
+- All materials at 
