@@ -246,11 +246,12 @@ class: middle
 # What is wrong with computer labs?
 
 .large[
-Compared to the computer labs approach, our approach has three distinct benefits:
 
+Compared to the computer labs approach, our approach has three distinct benefits:
 1. Passive lecturing then active labs are replaced by dynamic lectures and labs and 24/7 access to computing for active independent learning;
 2. Help students who have cost constraints or limitation to accessing computing hardware;
 3. Ease of sharing code, data and environments.
+
 ]
 
 ---
