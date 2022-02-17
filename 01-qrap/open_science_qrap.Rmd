@@ -206,7 +206,9 @@ class: middle
 ]
 
 .pull-right[
-https://q-rap.connnect.qub.ac.uk/QSMF
+
+[https://q-rap.connect.qub.ac.uk/QSMF/](https://q-rap.connect.qub.ac.uk/QSMF/)
+
 <iframe width="100%" height="400"
   src="https://q-rap.connect.qub.ac.uk/QSMF"
   frameborder="0" allow="autoplay; encrypted-media"
@@ -233,7 +235,7 @@ class: middle
 
 - Free to academia for teaching
 
-- Allows best practice usage of R markdwon, Git and dockerisation.
+- Allows best practice usage of Rmarkdown, Git and dockerisation.
 ]
 .pull-right[
 ![](img/Team.png)
