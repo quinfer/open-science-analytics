@@ -23,6 +23,7 @@ output:
 library(xaringanthemer)
 library(xaringanExtra)
 library(fontawesome)
+library(tidyverse)
 use_tile_view()
 use_webcam()
 style_mono_accent(
@@ -41,7 +42,7 @@ style_mono_accent(
 
 .bg_digital::before {    
       content: "";
-      background-image: url('img/digital-transformation.jpg');
+      background-image: url('img/title-slide.png');
       background-size: cover;
       position: absolute;
       top: 0px;
@@ -57,8 +58,11 @@ style_mono_accent(
 # Outline
 .salt[
 - Credibility and relevance in teaching
+- Rethinking statistical inference
+- Examples in finance
 - Open science analytics
 - Some examples in my teaching
+- Our Tech Stack (Q-RaP)
 - What is Q-RaP?
 - Why use Q-RaP?
 ]
@@ -79,6 +83,254 @@ class: middle
 
 
 .footnote[Don Hambrick’s (1994) presidential address at the 1993 Academy of Management’s annual meeting is often cited as the beginning of this conversation in the management field]
+
+---
+class: middle
+
+.huge-text[Somewhere, something incredible is waiting to be known- `r tufte::quote_footer('Carl Sargan')``]
+
+.large[In finance, we need a .glowline[reboot] of analytics towards a credible statistics toolkit]
+
+.hand[FinTech offers an opportunity to reshaping how we learning from *noisy* financial data, by placing computation and uncertainty estimation as the central tenet of finance curricula]
+
+---
+class: middle
+
+## Moving from computation to inference
+
+- To move from computation to inference in statistics, we must make an estimation choice.  
+- Mathematical statistics is the science of learning from experience that arrives a little at a time [@Efron2016] 
+- Then using this information to quantify uncertainty and variation[@Spiegelhalter2019]. 
+
+- Unlike many other disciplines in mathematics, there is no unifying theory. 
+- Credible inference from statistics requires careful thought beyond the computing algorithm. 
+- The modern financial data scientist is faced with two abstracting *leaps of faith* to go from computation to credible inference.
+
+---
+class: middle
+
+# The leaps of faith!
+
+- The theoretical inference paradigms are Classical (or frequentist) and Bayesian
+
+.blockquote[Roughly speaking, frequentists infer meaning by asking themselves *what would I see if I reran the same situation (and again and again and again,..., ad infinitum, et ultra)?* 
+
+.blockquote[
+On the other hand, bayesian coax a fantastical belief that *they have prior knowledge of the situation, encode this in probability, and update this knowledge by learning from a set of observed data points*.]
+
+- hand[In essence, one needs to be somewhat of a fantasist to generalise from statistical measurement.]
+
+---
+class: middle
+
+# Rethinking Statistical Inference
+
+- We use statistical inference when we want to learn from incomplete or imperfect data. 
+
+- Formally, statistical inference is a set of operations on data that yield estimates and uncertainty statements about predictions and parameters of some underlying process or population.  
+
+- Mathematically, these probabilistic uncertainty statements are derived based on some assumed probability model for observed data.
+
+- Understanding errors in statistical work depends on inferential statements built on the concepts of probability modelling, estimation, bias and variance. 
+
+- A central theme in modern statistical inference is uncertainty. 
+
+- Mainstream statistics has long argued that it is a mistake to use hypothesis tests or statistical significance to attribute certainty from noisy data [@ASApvalues.2016;@Campbell.2017,@Gelman2020].
+
+---
+class: middle
+
+## Simple uncertainty and computation exercise
+
+.panelset[
+.panel[
+.panel-name[Hypothetical example of regression for causal inference]
+- Start with a simple scenario comparing treatment and control groups.  
+- This condition can be approximated by *randomisation*, a design in which experimental units (in finance we can think of these a firms) are randomly assigned to treatment or control.
+- Consider the following hypothetical example where $x$ is a random market shock (the treatment) affecting only certain firms in the UK market (x=0 for control or x=1 for treatment)
+]
+.panel[.panel-name[Fake data]
+
+```{r}
+N <- 50
+x <- runif(N, 1, 5)
+y <- rnorm(N, 10 + 3*x, 3)
+x_binary <- ifelse(x<3, 0, 1)
+data <- data.frame(N, x, y, x_binary)
+lm_1a<-lm(y~x_binary,data)
+```
+]
+
+.panel[.panel-name[Open science analytics output]
+
+- The display function from `arm` purposefully removes the visualising of p-values.
+
+```{r}
+library(arm)
+lm_1b <- lm(y ~ x, data = data)
+display(lm_1b)
+```
+
+]
+.panel[.panel-name[Visualise data and model]
+
+```{r, echo=FALSE}
+data %>%
+  ggplot(aes(x=x,y=y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x="Treatment level", y="Outcome measurement",title="Regression with continuous treatment") +
+  geom_text( aes(x=3.2,y=15,label=paste("Estimated treatment\neffect per unit of x is\nslope of fitted line: ", fround(coef(lm_1b)[2], 1)),
+            parse = TRUE))
+
+```
+]
+.panel[.panel-name[Bayesian inference]
+```{r bayesian}
+library(rstanarm)
+library(bayesplot)
+library(tidyverse)
+options(mc.cores = parallel::detectCores())
+m1<-stan_glm(y~x,data=data,algorithm='optimizing')
+```
+]
+.panel[.panel-name[Bayesian regression output]
+
+
+```{r, out.height="50%"}
+summary(m1, digits = 2)
+```
+
+]
+.panel[.panel-name[Plotting the uncertainty]
+```{r echo=FALSE}
+posterior <- as.matrix(m1)
+plot_title <- ggtitle("Posterior distributions",
+                      "with medians and 80% intervals")
+mcmc_areas(posterior,
+           pars = c("x"),
+           prob = 0.8) + plot_title
+```
+
+]
+]
+
+---
+class: middle
+
+## Rethinking Statistical Inference:
+
+.hand-large[when building interpreting and checking statistical models]
+
+* Model building, starting with simple linear models of the form, $y=a+bx+error$ and expanding through additional predictors, interactions, and transformations.
+
+* Model fitting, which includes data manipulation, programming, and the use of algorithms to estimate regression coefficients and their uncertainties and to make probabilistic predictions.
+
+* Understanding model fits, which involves graphics, more programming, and an active investigation of the (imperfect) connections between measurements, parameters, and the underlying objects of study.
+
+* Criticism, which is not just about finding flaws and identifying questionable assumptions, but is also about considering directions for improvement of models. Or, if nothing else, limiting the claims that might be made by a naive reading of a fitted model.
+
+* The next step is to return to the model-building step, possibly incorporating new data in this effort. 
+
+---
+class: middle
+
+## Rethining statistical inference: 
+
+.hand-large[Modelling paradigm choices]
+
+.salt[
+- Most finance puzzle fit models to data and uses model to predict [@Kelly.2021].
+- There are three concerns common to all all steps in this framework
+
+1. What **information** is used in the estimation process
+2. What **assumptions** are made
+3. How estimates and predictions are **interpretted**, in a Classical or Bayesian framework
+]
+
+---
+class: middle
+
+## Information
+
+- In regressions we usually have data on an outcome variable and one of more predictors. 
+- As we seen previous if we have one $x$ predictor or one binary and one continuous predictor we have visual their relationship with the outcome $y$ variable
+- In finance we will also have information on what data was observed
+  - Is the data measured on a regular frequency? 
+  - Is the data free from survivor bias?
+  - Is the data a random or convenience sample?
+
+
+---
+class: middle
+
+### Prior information *learning from experience*
+
+- We may also have *prior knowledge* comes from sources other than the data, based on experience with previous or similar studies. 
+- This information should be handled with care, as published research tends to overestimate effect sizes
+- This is due to researchers being under pressure to find large and *statistically significant* results
+- There are setting when local data is weak and it would be foolish to draw conclusions without using prior knowledge
+
+---
+class: middle
+
+## Assumptions
+
+1. For example, the function form of the model; typically **linearity** in mainstream finance.
+2. Where does the data come from: which potential observations are seen and which are not. A strong assumption here would be that there has been random sampling or random treatment assignment. In finance random sampling is raw.
+3. The real-world relevance of the measured data; for example are today's measurements predictive of of what happens tomorrow?. 
+- .acidinline[In time series financial econometrics we assess this statistically by comparing the stability of observations conducted in different ways or at different times.]
+
+---
+class: middle
+
+# Classical inference
+
+- Based on summarising the information in the data alone, not using prior information. 
+- Getting estimates and predictions that have well-known statistical properties, low bias and low variance.
+- This attitude is sometimes called *Frequentist*, in that classical statisticians focus on the long-run expectation of their methods.
+- Estimates should be correct on average; **unbiasedness**.
+- Confidence intervals should cover the true parameter value 95% of the time
+- An important principle of classical estimates is *conversatism*.
+- In classical statistics there should be a clear and *objective* path from data to inference, which in turn should be checkable, at least in theory, based on their frequency properties.
+
+---
+class: middle
+
+# Bayesian inference
+
+- Goes beyond summarising data to produce statistical inferences that include prior information.
+- This information could be awareness of bias, selection on unmeasured characteristics, prior information of effect sizes.
+- One strength of Bayesian inference, the analysis can provide more reasonable inferences and can be used to make direct predictions about future outcomes.
+- One weakness is the need for an additional information; the **prior distribution**, which can be contentious in that it makes some claims about the range of the prediction effects.
+
+---
+class: middle
+
+## Rethinking statistical inference
+
+.hand-large[The choice]
+
+- .large[Classical inference, leading to pure summaries of data which can have limited value as predictions]
+- .large[Bayesian inference, which in theory can yield valid predictions even with weak data, but relies on additional assumptions]
+
+- .acidinline.large[A modern financial data scientist, knows there is no universally correct choice, but should be aware of both and use them pragmatically.]
+
+- .blockquote[
+
+- A practical advantage of Bayesian inference is that all inferences are probabilistic and thus can be represented by random simulations.
+
+- For this reason when you want to summarise uncertainty in estimation beyond confidence intervals, and when we want to use regression models for prediction, **going Bayesian is an obvious choice**.
+
+]
+
+---
+class: middle
+
+# Computer age statistical inference
+
+
+
 
 ---
 class: middle
