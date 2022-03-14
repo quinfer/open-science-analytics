@@ -1,12 +1,12 @@
 ---
 title: "Teaching <br> Open Science Analytics <br> in the Digital Age"
-subtitle: "Q-RaP and teaching in the `r emo::ji('cloud')`"
-author: "Barry Quinn"
+subtitle: "DCU FinLab Presentation"
+author: "Barry Quinn PhD CStat"
 output:
   xaringan::moon_reader:
     self_contained: true
     lib_dir: libs
-    css: ["xaringan-themer.css", "slides-style.css","mycssblend.css"]
+    css: ["xaringan-themer.css","mycssblend.css"]
     seal: true
     nature:
       countdown: 120000 
@@ -26,6 +26,7 @@ library(fontawesome)
 library(tidyverse)
 use_tile_view()
 use_webcam()
+use_panelset()
 style_mono_accent(
   base_color = "#1c5253",
   header_font_google = google_font("Josefin Sans"),
@@ -57,14 +58,14 @@ style_mono_accent(
 
 # Outline
 .salt[
-- Credibility and relevance in teaching
-- Rethinking statistical inference
-- Examples in finance
-- Open science analytics
-- Some examples in my teaching
-- Our Tech Stack (Q-RaP)
-- What is Q-RaP?
-- Why use Q-RaP?
+- Credibility and relevance in teaching (WHY)
+- Rethinking statistical inference (WHY)
+- Examples in finance (WHY)
+- Open science analytics (HOW)
+- Our Tech Stack (Q-RaP) (HOW)
+- What is Q-RaP? (HOW)
+- Why use Q-RaP? (HOW and WHY)
+- Some examples in my teaching (HOW)
 ]
 
 ---
@@ -87,9 +88,9 @@ class: middle
 ---
 class: middle
 
-.huge-text[Somewhere, something incredible is waiting to be known- `r tufte::quote_footer('Carl Sargan')``]
+.huge-text[Somewhere, something *incredible* is waiting to be known `r tufte::quote_footer('Carl Sargan')`]
 
-.large[In finance, we need a .glowline[reboot] of analytics towards a credible statistics toolkit]
+.large[In finance, we need a .glowinline[reboot] of analytics towards a *credible* statistics toolkit]
 
 .hand[FinTech offers an opportunity to reshaping how we learning from *noisy* financial data, by placing computation and uncertainty estimation as the central tenet of finance curricula]
 
@@ -99,7 +100,9 @@ class: middle
 ## Moving from computation to inference
 
 - To move from computation to inference in statistics, we must make an estimation choice.  
+
 - Mathematical statistics is the science of learning from experience that arrives a little at a time [@Efron2016] 
+
 - Then using this information to quantify uncertainty and variation[@Spiegelhalter2019]. 
 
 - Unlike many other disciplines in mathematics, there is no unifying theory. 
@@ -113,12 +116,12 @@ class: middle
 
 - The theoretical inference paradigms are Classical (or frequentist) and Bayesian
 
-.blockquote[Roughly speaking, frequentists infer meaning by asking themselves *what would I see if I reran the same situation (and again and again and again,..., ad infinitum, et ultra)?* 
+.blockquote[Roughly speaking, frequentists infer meaning by asking themselves *what would I see if I reran the same situation (and again and again and again,..., ad infinitum, et ultra)?* ]
 
 .blockquote[
 On the other hand, bayesian coax a fantastical belief that *they have prior knowledge of the situation, encode this in probability, and update this knowledge by learning from a set of observed data points*.]
 
-- hand[In essence, one needs to be somewhat of a fantasist to generalise from statistical measurement.]
+- .hand[In essence, one needs to be somewhat of a fantasist to generalise from statistical measurement.]
 
 ---
 class: middle
@@ -220,7 +223,7 @@ class: middle
 
 ## Rethinking Statistical Inference:
 
-.hand-large[when building interpreting and checking statistical models]
+.hand[when building interpreting and checking statistical models]
 
 * Model building, starting with simple linear models of the form, $y=a+bx+error$ and expanding through additional predictors, interactions, and transformations.
 
@@ -237,7 +240,7 @@ class: middle
 
 ## Rethining statistical inference: 
 
-.hand-large[Modelling paradigm choices]
+.hand[Modelling paradigm choices]
 
 .salt[
 - Most finance puzzle fit models to data and uses model to predict [@Kelly.2021].
@@ -309,25 +312,31 @@ class: middle
 
 ## Rethinking statistical inference
 
-.hand-large[The choice]
+.hand[The choice]
 
-- .large[Classical inference, leading to pure summaries of data which can have limited value as predictions]
-- .large[Bayesian inference, which in theory can yield valid predictions even with weak data, but relies on additional assumptions]
+- Classical inference, leading to pure summaries of data which can have limited value as predictions
+- Bayesian inference, which in theory can yield valid predictions even with weak data, but relies on additional assumptions
 
-- .acidinline.large[A modern financial data scientist, knows there is no universally correct choice, but should be aware of both and use them pragmatically.]
-
-- .blockquote[
+- .acidinline[A modern financial data scientist, knows there is no universally correct choice, but should be aware of both and use them pragmatically.]
 
 - A practical advantage of Bayesian inference is that all inferences are probabilistic and thus can be represented by random simulations.
 
 - For this reason when you want to summarise uncertainty in estimation beyond confidence intervals, and when we want to use regression models for prediction, **going Bayesian is an obvious choice**.
 
-]
 
 ---
 class: middle
 
-# Computer age statistical inference
+# Rethinking statistical inference in finance
+
+.large[
+1. .Bollerslev, T., Li, J. & Liao, Z. Fixed‐k inference for volatility. Quant Econ 12, 1053–1084 (2021).
+  
+
+
+2. Jensen, T. I., Kelly, B. T. & Pedersen, L. H. Is There a Replication Crisis in Finance? Ssrn Electron J (2021) doi:10.2139/ssrn.3774514.
+  
+]
 
 
 
