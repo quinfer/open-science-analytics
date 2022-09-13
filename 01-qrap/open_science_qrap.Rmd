@@ -33,26 +33,14 @@ style_mono_accent(
   text_font_google   = google_font("Montserrat", "300", "300i"),
   code_font_google   = google_font("Fira Mono")
   )
-```
-
-```{css, echo = F}
-.bg_digital {
-  position: relative;
-  z-index: 1;
-}
-
-.bg_digital::before {    
-      content: "";
-      background-image: url('img/title-slide.png');
-      background-size: cover;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;
-      opacity: 0.4;
-      z-index: -1;
-}
+library(RefManageR)
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = "alphabetic",
+           style = "markdown",
+           hyperlink = FALSE,
+           dashed = FALSE)
+myBib <- ReadBib("biblio.bib", check = FALSE)
 ```
 
 
@@ -87,6 +75,10 @@ class: middle
 
 ---
 class: middle
+
+# Start of WHY
+
+- Go to [HOW content](#how-content)
 
 .huge-text[Somewhere, something *incredible* is waiting to be known `r tufte::quote_footer('Carl Sargan')`]
 
@@ -140,83 +132,83 @@ class: middle
 
 - Mainstream statistics has long argued that it is a mistake to use hypothesis tests or statistical significance to attribute certainty from noisy data [@ASApvalues.2016;@Campbell.2017,@Gelman2020].
 
----
-class: middle
+<!-- --- -->
+<!-- class: middle -->
 
-## Simple uncertainty and computation exercise
+<!-- ## Simple uncertainty and computation exercise -->
 
-.panelset[
-.panel[
-.panel-name[Hypothetical example of regression for causal inference]
-- Start with a simple scenario comparing treatment and control groups.  
-- This condition can be approximated by *randomisation*, a design in which experimental units (in finance we can think of these a firms) are randomly assigned to treatment or control.
-- Consider the following hypothetical example where $x$ is a random market shock (the treatment) affecting only certain firms in the UK market (x=0 for control or x=1 for treatment)
-]
-.panel[.panel-name[Fake data]
+<!-- .panelset[ -->
+<!-- .panel[ -->
+<!-- .panel-name[Hypothetical example of regression for causal inference] -->
+<!-- - Start with a simple scenario comparing treatment and control groups.   -->
+<!-- - This condition can be approximated by *randomisation*, a design in which experimental units (in finance we can think of these a firms) are randomly assigned to treatment or control. -->
+<!-- - Consider the following hypothetical example where $x$ is a random market shock (the treatment) affecting only certain firms in the UK market (x=0 for control or x=1 for treatment) -->
+<!-- ] -->
+<!-- .panel[.panel-name[Fake data] -->
 
-```{r}
-N <- 50
-x <- runif(N, 1, 5)
-y <- rnorm(N, 10 + 3*x, 3)
-x_binary <- ifelse(x<3, 0, 1)
-data <- data.frame(N, x, y, x_binary)
-lm_1a<-lm(y~x_binary,data)
-```
-]
+<!-- ```{r} -->
+<!-- N <- 50 -->
+<!-- x <- runif(N, 1, 5) -->
+<!-- y <- rnorm(N, 10 + 3*x, 3) -->
+<!-- x_binary <- ifelse(x<3, 0, 1) -->
+<!-- data <- data.frame(N, x, y, x_binary) -->
+<!-- lm_1a<-lm(y~x_binary,data) -->
+<!-- ``` -->
+<!-- ] -->
 
-.panel[.panel-name[Open science analytics output]
+<!-- .panel[.panel-name[Open science output] -->
 
-- The display function from `arm` purposefully removes the visualising of p-values.
+<!-- - The display function from `arm` purposefully removes the visualising of p-values. -->
 
-```{r}
-library(arm)
-lm_1b <- lm(y ~ x, data = data)
-display(lm_1b)
-```
+<!-- ```{r,o} -->
+<!-- library(arm) -->
+<!-- lm_1b <- lm(y ~ x, data = data) -->
+<!-- display(lm_1b) -->
+<!-- ``` -->
 
-]
-.panel[.panel-name[Visualise data and model]
+<!-- ] -->
+<!-- .panel[.panel-name[Visualise data and model] -->
 
-```{r, echo=FALSE}
-data %>%
-  ggplot(aes(x=x,y=y)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(x="Treatment level", y="Outcome measurement",title="Regression with continuous treatment") +
-  geom_text( aes(x=3.2,y=15,label=paste("Estimated treatment\neffect per unit of x is\nslope of fitted line: ", fround(coef(lm_1b)[2], 1)),
-            parse = TRUE))
+<!-- ```{r, echo=FALSE} -->
+<!-- data %>% -->
+<!--   ggplot(aes(x=x,y=y)) + -->
+<!--   geom_point() + -->
+<!--   geom_smooth(method = "lm", se = FALSE) + -->
+<!--   labs(x="Treatment level", y="Outcome measurement",title="Regression with continuous treatment") + -->
+<!--   geom_text( aes(x=3.2,y=15,label=paste("Estimated treatment\neffect per unit of x is\nslope of fitted line: ", fround(coef(lm_1b)[2], 1)), -->
+<!--             parse = TRUE)) -->
 
-```
-]
-.panel[.panel-name[Bayesian inference]
-```{r bayesian}
-library(rstanarm)
-library(bayesplot)
-library(tidyverse)
-options(mc.cores = parallel::detectCores())
-m1<-stan_glm(y~x,data=data,algorithm='optimizing')
-```
-]
-.panel[.panel-name[Bayesian regression output]
+<!-- ``` -->
+<!-- ] -->
+<!-- .panel[.panel-name[Bayesian inference] -->
+<!-- ```{r bayesian} -->
+<!-- library(rstanarm) -->
+<!-- library(bayesplot) -->
+<!-- library(tidyverse) -->
+<!-- options(mc.cores = parallel::detectCores()) -->
+<!-- m1<-stan_glm(y~x,data=data,algorithm='optimizing') -->
+<!-- ``` -->
+<!-- ] -->
+<!-- .panel[.panel-name[Bayesian regression output] -->
 
 
-```{r, out.height="50%"}
-summary(m1, digits = 2)
-```
+<!-- ```{r, out.height="50%"} -->
+<!-- summary(m1, digits = 2) -->
+<!-- ``` -->
 
-]
-.panel[.panel-name[Plotting the uncertainty]
-```{r echo=FALSE}
-posterior <- as.matrix(m1)
-plot_title <- ggtitle("Posterior distributions",
-                      "with medians and 80% intervals")
-mcmc_areas(posterior,
-           pars = c("x"),
-           prob = 0.8) + plot_title
-```
+<!-- ] -->
+<!-- .panel[.panel-name[Plotting the uncertainty] -->
+<!-- ```{r echo=FALSE} -->
+<!-- posterior <- as.matrix(m1) -->
+<!-- plot_title <- ggtitle("Posterior distributions", -->
+<!--                       "with medians and 80% intervals") -->
+<!-- mcmc_areas(posterior, -->
+<!--            pars = c("x"), -->
+<!--            prob = 0.8) + plot_title -->
+<!-- ``` -->
 
-]
-]
+<!-- ] -->
+<!-- ] -->
 
 ---
 class: middle
@@ -242,8 +234,7 @@ class: middle
 
 .hand[Modelling paradigm choices]
 
-.salt[
-- Most finance puzzle fit models to data and uses model to predict [@Kelly.2021].
+- Most finance puzzle fit models to data and uses model to predict  [@Kelly.2021].
 - There are three concerns common to all all steps in this framework
 
 1. What **information** is used in the estimation process
@@ -343,6 +334,7 @@ class: middle
 
 ---
 class: middle
+name: how-content
 
 # Open science
 
